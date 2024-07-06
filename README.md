@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 # 🚀 Getting started with Strapi
 
 Strapi comes with a full featured [Command Line Interface](https://docs.strapi.io/dev-docs/cli) (CLI) which lets you scaffold and manage your project in seconds.
@@ -63,3 +64,6 @@ Feel free to check out the [Strapi GitHub repository](https://github.com/strapi/
 =======
 # Ayna-backend
 >>>>>>> origin/main
+=======
+# Ayna-backend
+>>>>>>> 7cef655498150f43c46a2f14e3175812b92db2ce
