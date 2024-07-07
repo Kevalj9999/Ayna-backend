@@ -1,4 +1,5 @@
 'use strict';
+const startSocketServer = require('../src/api/src/services/websocket/websocket');
 
 module.exports = {
   /**
@@ -17,15 +18,12 @@ module.exports = {
    * run jobs, or perform some special logic.
    */
   async bootstrap({ strapi }) {
-    // Import and start the WebSocket server
-    const WebSocketServer = require('./api/src/services/websocket/websocket');
+    // Use Strapi's existing HTTP server to start the Socket.IO server
+    const server = strapi.server.httpServer;
 
-    const port = 8080;
-    const wss = WebSocketServer(port);
+    // Start the Socket.IO server
+    startSocketServer(server);
 
-    wss.on('listening', () => {
-      console.log(`(Index.js) WebSocket server is listening on port ${port}`);
-    });
-
+    console.log(`Server is running on port ${process.env.PORT || 1337}`);
   },
 };

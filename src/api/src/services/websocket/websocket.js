@@ -1,23 +1,28 @@
-const WebSocket = require('ws');
+const { Server } = require('socket.io');
 
-const startWebSocketServer = (port) => {
-  const wss = new WebSocket.Server({ port });
+const startSocketServer = (server) => {
+  const io = new Server(server, {
+    cors: {
+      origin: ['http://localhost:3000', 'https://ayna-frontend.netlify.app'],
+      methods: ['GET', 'POST'],
+      allowedHeaders: ['Authorization'],
+      credentials: true,
+    }
+  });
 
-  wss.on('connection', (ws) => {
-    ws.on('message', (message) => {
+  io.on('connection', (socket) => {
+    console.log('a user connected');
+    socket.on('message', (message) => {
       console.log('received: %s', message);
-      ws.send(message); // Echo back the entire message as received
+      io.emit('message', message); // Broadcast the message to all connected clients
+    });
+
+    socket.on('disconnect', () => {
+      console.log('user disconnected');
     });
   });
 
-  console.log(`WebSocket server is running on port ${port}`);
-
-  // Periodically log the WebSocket URL
-  setInterval(() => {
-    console.log(`WebSocket server is still running on ws://localhost:${port}`);
-  }, 120000); // 120000 ms = 2 minutes
-
-  return wss;
+  console.log('WebSocket server is running');
 };
 
-module.exports = startWebSocketServer;
+module.exports = startSocketServer;
