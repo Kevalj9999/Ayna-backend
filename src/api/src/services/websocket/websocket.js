@@ -1,7 +1,7 @@
 const WebSocket = require('ws');
 
 const startWebSocketServer = () => {
-  const wss = new WebSocket.Server({ port: 8080 });
+  const wss = new WebSocket.Server({ noServer: true });
 
   wss.on('connection', (ws) => {
     ws.on('message', (message) => {
@@ -10,7 +10,8 @@ const startWebSocketServer = () => {
     });
   });
 
-  console.log('WebSocket server is running on ws://localhost:8080');
+  console.log('WebSocket server is running');
+  return wss;
 };
 
 module.exports = startWebSocketServer;
