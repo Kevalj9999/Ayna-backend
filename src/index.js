@@ -18,7 +18,14 @@ module.exports = {
    */
   async bootstrap({ strapi }) {
     // Import and start the WebSocket server
-    const startWebSocketServer = require('./api/src/services/websocket/websocket');
-    startWebSocketServer();
+    const WebSocketServer = require('./api/src/services/websocket/websocket');
+
+    const port = 8080;
+    const wss = WebSocketServer(port);
+
+    wss.on('listening', () => {
+      console.log(`(Index.js) WebSocket server is listening on port ${port}`);
+    });
+
   },
 };
