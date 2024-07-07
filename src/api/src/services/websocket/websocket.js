@@ -3,7 +3,7 @@ const { Server } = require('socket.io');
 const startSocketServer = (server) => {
   const io = new Server(server, {
     cors: {
-      origin: ['http://localhost:3000', 'https://ayna-frontend.netlify.app'],
+      origin: ['http://localhost:3000', 'https://main--ayna-frontend.netlify.app'],
       methods: ['GET', 'POST'],
       allowedHeaders: ['Authorization'],
       credentials: true,
