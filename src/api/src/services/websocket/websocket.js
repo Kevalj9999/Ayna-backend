@@ -10,7 +10,13 @@ const startWebSocketServer = (port) => {
     });
   });
 
-  console.log(`(Websocket.js) WebSocket server is running on port ${port}`);
+  console.log(`WebSocket server is running on port ${port}`);
+
+  // Periodically log the WebSocket URL
+  setInterval(() => {
+    console.log(`WebSocket server is still running on ws://localhost:${port}`);
+  }, 120000); // 120000 ms = 2 minutes
+
   return wss;
 };
 
