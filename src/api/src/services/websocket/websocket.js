@@ -1,6 +1,6 @@
 const WebSocket = require('ws');
 
-const startWebSocketServer = () => {
+const startWebSocketServer = (port = 8080) => {
   const wss = new WebSocket.Server({ noServer: true });
 
   wss.on('connection', (ws) => {
@@ -10,7 +10,20 @@ const startWebSocketServer = () => {
     });
   });
 
-  console.log('WebSocket server is running');
+  wss.on('listening', () => {
+    console.log(`WebSocket server is running on port ${wss.options.port}`);
+  });
+
+  wss.on('error', (error) => {
+    console.error('WebSocket server error:', error);
+  });
+
+  wss.on('close', () => {
+    console.log('WebSocket server closed');
+  });
+
+  wss.listen(port);
+
   return wss;
 };
 
